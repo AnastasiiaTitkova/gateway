@@ -1,0 +1,35 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes[0]:
+        id: sms
+        uri: lb://client
+        predicates[0]: Path=/sms
+        predicates[1]: Method=GET
+      routes[1]:
+        id: push
+        uri: lb://client2
+        predicates[0]: Path=/push
+        predicates[1]: Method=GET
+      routes[2]:
+        id: email
+        uri: lb://client3
+        predicates[0]: Path=/email
+        predicates[1]: Method=GET
+eureka:
+  instance:
+    instance-id: gateway
+  client:
+    service-url:
+      defaultZone: http://host.docker.internal:8081/eureka
+
+
