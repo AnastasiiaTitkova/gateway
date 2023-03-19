@@ -14,17 +14,17 @@ spring:
         id: sms
         uri: lb://client
         predicates[0]: Path=/sms
-        predicates[1]: Method=GET
+        predicates[1]: Method=POST
       routes[1]:
         id: push
         uri: lb://client2
         predicates[0]: Path=/push
-        predicates[1]: Method=GET
+        predicates[1]: Method=POST
       routes[2]:
         id: email
         uri: lb://client3
         predicates[0]: Path=/email
-        predicates[1]: Method=GET
+        predicates[1]: Method=POST
 eureka:
   instance:
     instance-id: gateway
